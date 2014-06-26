@@ -15,6 +15,20 @@ import (
 	"unsafe"
 )
 
+type Orientation C.OrientationType
+
+const (
+	UndefinedOrientation	Orientation = C.UndefinedOrientation
+	TopLeftOrientation		Orientation = C.TopLeftOrientation
+	TopRightOrientation		Orientation = C.TopRightOrientation		
+	BottomRightOrientation		Orientation = C.BottomRightOrientation		
+	BottomLeftOrientation		Orientation = C.BottomLeftOrientation		
+	LeftTopOrientation		Orientation = C.LeftTopOrientation		
+	RightTopOrientation		Orientation = C.RightTopOrientation		
+	RightBottomOrientation		Orientation = C.RightBottomOrientation		
+	LeftBottomOrientation		Orientation = C.LeftBottomOrientation		
+)
+
 // Image represents an in-memory decoded image.
 // Some images (like e.g. GIF animations) might have
 // multiple frames. Unless indicated otherwise, functions
@@ -57,6 +71,14 @@ func (im *Image) Format() string {
 func (im *Image) Depth() int {
 	return int(im.image.depth)
 }
+
+func (im *Image) Orientation() (Orientation) {
+	return Orientation(im.image.orientation)	
+}
+
+func (im *Image) SetOrientation(orientation (Orientation)) {
+	im.image.orientation = C.OrientationType(orientation)	
+} 
 
 // Delay returns the time this image stays visible in
 // an animation, in 1/100ths of a second. If this image

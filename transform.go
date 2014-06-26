@@ -25,6 +25,15 @@ const (
 	CSMaxEntropy
 )
 
+// func (im *Image) AutoOrient() (*Image, error) {
+// 	var ex C.ExceptionInfo
+// 	C.GetExceptionInfo(&ex)
+// 	defer C.DestroyExceptionInfo(&ex)
+// 	oriented = C.AutoOrientImage(im.image, C.OrientationType(im.Orientation()), &ex)
+// 	return checkImage(oriented, nil, &ex, "autootienting")
+// }
+
+
 func (im *Image) Chop(r Rect) (*Image, error) {
 	return im.applyRectFunc("chopping", C.ImageDataFunc(C.ChopImage), r)
 }
